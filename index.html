@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://i.ibb.co/Lv8Xsf9/422f58d3-f8a7-4ed0-a9ad-2ca8bc8b2c99.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            text-align: center;
+        }
+        .count-container {
+            margin-bottom: 40px; /* Space between counter and button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .count {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin-left: 20px; /* Space between image and counter */
+            position: relative;
+            left: -30px; /* Move the counter slightly left */
+        }
+        .button {
+            width: 250px; /* Increased size */
+            height: 250px; /* Increased size */
+            border-radius: 50%;
+            background: url('https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png') no-repeat center center;
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .button:active {
+            animation: vibrate 0.2s;
+        }
+        .vibration-effect {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold; /* Make the text bold */
+            color: white;
+            text-shadow: 0 0 2px black; /* Optional: add shadow for better visibility */
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .image {
+            width: 30px; /* Set image size to 30x30 pixels */
+            height: 30px; /* Set image height to 30 pixels */
+            margin-right: 20px; /* Space between image and counter */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            max-width: 1200px; /* Adjust as needed */
+            padding: 0 20px;
+            gap: 10px; /* Space between buttons */
+            left: -20px; /* Move buttons slightly to the left */
+        }
+        .task-button, .mine-button, .referral-button, .airdrop-button {
+            padding: 5px 10px; /* Reduced padding */
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            border: 2px solid transparent; /* Transparent border initially */
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px; /* Reduced font size */
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s;
+        }
+        .task-button:hover, .mine-button:hover, .referral-button:hover, .airdrop-button:hover {
+            border-color: #FFD700; /* Change border color on hover */
+        }
+        .task-button:active, .mine-button:active, .referral-button:active, .airdrop-button:active {
+            transform: scale(0.95);
+        }
+        .mine-icon, .airdrop-icon {
+            width: 20px; /* Adjust icon size */
+            height: 20px;
+            margin-right: 5px; /* Space between icon and text */
+        }
+        .task-button.glow, .mine-button.glow, .referral-button.glow, .airdrop-button.glow {
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
+            }
+        }
+        .section {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            color: white; /* Ensure text is readable */
+        }
+        .section.active {
+            display: block;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="mainPage" class="section active">
+            <div class="count-container">
+                <img src="https://i.ibb.co/2WrDv5n/IMG-20240723-WA0002-photoaidcom-cropped-jpg-1.png" alt="Counter Image" class="image">
+                <div class="count" id="count">0</div>
+            </div>
+            <button class="button" id="clickerButton">
+                <div class="vibration-effect" id="vibrationEffect">+1</div>
+            </button>
+            <div class="button-container">
+                <a class="task-button" id="taskButtonMain" onclick="showSection('taskPage')">Task</a>
+                <a class="mine-button" id="mineButton">
+                    <img src="https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png" alt="Mine Icon" class="mine-icon">
+                    Mine
+                </a>
+                <a class="referral-button" id="referralButtonMain" onclick="showSection('referral')">Referral</a>
+                <a class="airdrop-button" id="airdropButtonMain" onclick="showSection('airdrop')">Airdrop</a>
+            </div>
+        </div>
+
+        <div id="taskPage" class="section">
+            <h1>Task Page</h1>
+            <p>Content for Task page goes here.</p>
+            <div class="button-container">
+                <a class="task-button" id="taskButtonTask" onclick="showSection('taskPage')">Task</a>
+                <a class="mine-button" id="mineButtonTask">
+                    <img src="https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png" alt="Mine Icon" class="mine-icon">
+                    Mine
+                </a>
+                <a class="referral-button" id="referralButtonTask" onclick="showSection('referral')">Referral</a>
+                <a class="airdrop-button" id="airdropButtonTask" onclick="showSection('airdrop')">Airdrop</a>
+            </div>
+            <div class="back-button" onclick="showSection('mainPage')">Back</div>
+        </div>
+
+        <div id="referral" class="section">
+            <h1>Referral</h1>
+            <p>Content for Referral page goes here.</p>
+            <div class="button-container">
+                <a class="task-button" id="taskButtonReferral" onclick="showSection('taskPage')">Task</a>
+                <a class="mine-button" id="mineButtonReferral">
+                    <img src="https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png" alt="Mine Icon" class="mine-icon">
+                    Mine
+                </a>
+                <a class="referral-button" id="referralButtonReferral" onclick="showSection('referral')">Referral</a>
+                <a class="airdrop-button" id="airdropButtonReferral" onclick="showSection('airdrop')">Airdrop</a>
+            </div>
+            <div class="back-button" onclick="showSection('mainPage')">Back</div>
+        </div>
+
+        <div id="airdrop" class="section">
+            <h1>Airdrop</h1>
+            <p>Content for Airdrop page goes here.</p>
+            <div class="button-container">
+                <a class="task-button" id="taskButtonAirdrop" onclick="showSection('taskPage')">Task</a>
+                <a class="mine-button" id="mineButtonAirdrop">
+                    <img src="https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png" alt="Mine Icon" class="mine-icon">
+                    Mine
+                </a>
+                <a class="referral-button" id="referralButtonAirdrop" onclick="showSection('referral')">Referral</a>
+                <a class="airdrop-button" id="airdropButtonAirdrop" onclick="showSection('airdrop')">Airdrop</a>
+            </div>
+            <div class="back-button" onclick="showSection('mainPage')">Back</div>
+        </div>
+    </div>
+
+    <script>
+        let count = localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) : 0;
+        const countElement = document.getElementById('count');
+        const button = document.getElementById('clickerButton');
+        const vibrationEffect = document.getElementById('vibrationEffect');
+        const mineButton = document.getElementById('mineButton');
+        const mineButtonTask = document.getElementById('mineButtonTask');
+        const mineButtonReferral = document.getElementById('mineButtonReferral');
+        const mineButtonAirdrop = document.getElementById('mineButtonAirdrop');
+
+        countElement.textContent = count;
+
+        button.addEventListener('click', (event) => {
+            count++;
+            countElement.textContent = count;
+            localStorage.setItem('count', count);
+
+            // Get the click position relative to the button
+            const rect = button.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Position the vibration effect
+            vibrationEffect.style.left = `${x}px`;
+            vibrationEffect.style.top = `${y}px`;
+            vibrationEffect.style.opacity = 1;
+
+            // Hide vibration effect after 2 seconds
+            setTimeout(() => {
+                vibrationEffect.style.opacity = 0;
+            }, 2000);
+        });
+
+        function handleButtonClick(button) {
+            button.classList.add('glow');
+            button.style.borderColor = '#FFD700'; // Highlight border color on click
+
+            // Remove glow effect and border color after 1.5 seconds (duration of glow animation)
+            setTimeout(() => {
+                button.classList.remove('glow');
+                button.style.borderColor = 'transparent'; // Reset border color
+            }, 1500);
+        }
+
+        mineButton.addEventListener('click', () => {
+            handleButtonClick(mineButton);
+            showSection('mainPage');
+        });
+        mineButtonTask.addEventListener('click', () => {
+            handleButtonClick(mineButtonTask);
+            showSection('mainPage');
+        });
+        mineButtonReferral.addEventListener('click', () => {
+            handleButtonClick(mineButtonReferral);
+            showSection('mainPage');
+        });
+        mineButtonAirdrop.addEventListener('click', () => {
+            handleButtonClick(mineButtonAirdrop);
+            showSection('mainPage');
+        });
+
+        document.querySelectorAll('.task-button, .referral-button, .airdrop-button').forEach(button => {
+            button.addEventListener('click', () => handleButtonClick(button));
+        });
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
